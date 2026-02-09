@@ -9,7 +9,7 @@
   "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stanlink/stanlink-ui.git"
+    "url": "https://github.com/StaNLink-Inc/stanlink-ui.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
