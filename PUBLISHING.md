@@ -1,27 +1,31 @@
 # Publishing Guide
 
-## Install from GitHub (Private Repo)
+## Install from GitHub Packages
 
-In your app's package.json:
+### Setup (One-time)
 
-```json
-{
-  "dependencies": {
-    "@stanlink/ui": "github:your-username/stanlink-ui#main"
-  }
-}
-```
+1. **Create GitHub Personal Access Token**
+   - Go to: https://github.com/settings/tokens
+   - Generate new token (classic)
+   - Select scope: `read:packages`
+   - Copy the token
 
-Or install directly:
+2. **Create `.npmrc` in your project:**
+   ```
+   @stanlink-inc:registry=https://npm.pkg.github.com
+   //npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+   ```
+
+### Install
 
 ```bash
-npm install github:your-username/stanlink-ui#main
+npm install @stanlink-inc/ui
 ```
 
-## Usage
+### Usage
 
 ```tsx
-import { Button, theme } from '@stanlink/ui';
+import { Button, theme } from '@stanlink-inc/ui';
 import { ThemeProvider } from '@mui/material/styles';
 
 function App() {
@@ -36,13 +40,11 @@ function App() {
 ## Update to Latest
 
 ```bash
-npm update @stanlink/ui
+npm update @stanlink-inc/ui
 ```
 
-## Install Specific Version/Branch/Commit
+## Install Specific Version
 
 ```bash
-npm install github:your-username/stanlink-ui#v0.1.0
-npm install github:your-username/stanlink-ui#develop
-npm install github:your-username/stanlink-ui#abc1234
+npm install @stanlink-inc/ui@0.1.2
 ```
