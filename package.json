@@ -1,7 +1,7 @@
 {
-  "name": "@stanlink/ui",
+  "name": "@stanlink-inc/ui",
   "private": false,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "StaNLink Design System - Professional UI components for consistent branding",
   "type": "module",
   "main": "./dist/index.js",
