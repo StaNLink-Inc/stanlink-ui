@@ -1,0 +1,13 @@
+src/
+.storybook/
+stories/
+*.stories.tsx
+*.test.tsx
+.eslintrc.cjs
+vite.config.ts
+vite.config.lib.ts
+tsconfig.json
+tsconfig.app.json
+tsconfig.node.json
+.gitignore
+TEMPLATES_TODO.md
