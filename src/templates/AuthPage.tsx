@@ -8,10 +8,12 @@ export interface AuthPageProps {
   onSignUp?: (name: string, email: string, password: string) => void;
   onForgotPassword?: (email: string) => void;
   onResetPassword?: (password: string, confirmPassword: string) => void;
-  onSocialAuth?: (provider: 'google' | 'github', mode: 'login' | 'signup') => void;
+  onSocialAuth?: (provider: string, mode: 'login' | 'signup') => void;
+  onViewChange?: (view: 'signin' | 'signup' | 'forgot' | 'reset') => void;
   loading?: boolean;
   error?: string;
   view?: 'signin' | 'signup' | 'forgot' | 'reset';
+  socialProviders?: Array<{ name: string; icon: React.ReactNode }>;
 }
 
 export const AuthPage: React.FC<AuthPageProps> = ({
@@ -20,9 +22,11 @@ export const AuthPage: React.FC<AuthPageProps> = ({
   onForgotPassword,
   onResetPassword,
   onSocialAuth,
+  onViewChange,
   loading = false,
   error,
   view = 'signin',
+  socialProviders,
 }) => {
   const [currentView, setCurrentView] = React.useState<'signin' | 'signup' | 'forgot' | 'reset'>(view);
   const [isTransitioning, setIsTransitioning] = React.useState(false);
@@ -36,6 +40,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
     setIsTransitioning(true);
     setTimeout(() => {
       setCurrentView(newView);
+      onViewChange?.(newView);
       setTimeout(() => setIsTransitioning(false), 800);
     }, 0);
   };
@@ -189,32 +194,55 @@ export const AuthPage: React.FC<AuthPageProps> = ({
               {loading ? 'Signing in...' : 'Sign In'}
             </Button>
 
-            <Divider sx={{ my: 2 }}>OR</Divider>
+            {(onSocialAuth || socialProviders) && (
+              <>
+                <Divider sx={{ my: 2 }}>OR</Divider>
 
-            <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', mb: 2 }}>
-              <IconButton
-                onClick={() => onSocialAuth?.('google', 'login')}
-                disabled={loading}
-                sx={{
-                  border: 1,
-                  borderColor: 'divider',
-                  '&:hover': { borderColor: 'primary.main', bgcolor: 'primary.main', color: 'white' },
-                }}
-              >
-                <GoogleIcon />
-              </IconButton>
-              <IconButton
-                onClick={() => onSocialAuth?.('github', 'login')}
-                disabled={loading}
-                sx={{
-                  border: 1,
-                  borderColor: 'divider',
-                  '&:hover': { borderColor: 'primary.main', bgcolor: 'primary.main', color: 'white' },
-                }}
-              >
-                <GitHubIcon />
-              </IconButton>
-            </Box>
+                <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', mb: 2 }}>
+                  {socialProviders ? (
+                    socialProviders.map((provider) => (
+                      <IconButton
+                        key={provider.name}
+                        onClick={() => onSocialAuth?.(provider.name, 'login')}
+                        disabled={loading}
+                        sx={{
+                          border: 1,
+                          borderColor: 'divider',
+                          '&:hover': { borderColor: 'primary.main', bgcolor: 'primary.main', color: 'white' },
+                        }}
+                      >
+                        {provider.icon}
+                      </IconButton>
+                    ))
+                  ) : (
+                    <>
+                      <IconButton
+                        onClick={() => onSocialAuth?.('google', 'login')}
+                        disabled={loading}
+                        sx={{
+                          border: 1,
+                          borderColor: 'divider',
+                          '&:hover': { borderColor: 'primary.main', bgcolor: 'primary.main', color: 'white' },
+                        }}
+                      >
+                        <GoogleIcon />
+                      </IconButton>
+                      <IconButton
+                        onClick={() => onSocialAuth?.('github', 'login')}
+                        disabled={loading}
+                        sx={{
+                          border: 1,
+                          borderColor: 'divider',
+                          '&:hover': { borderColor: 'primary.main', bgcolor: 'primary.main', color: 'white' },
+                        }}
+                      >
+                        <GitHubIcon />
+                      </IconButton>
+                    </>
+                  )}
+                </Box>
+              </>
+            )}
 
             <Box sx={{ textAlign: 'center' }}>
               <Typography variant="body2" color="text.secondary">
@@ -291,32 +319,55 @@ export const AuthPage: React.FC<AuthPageProps> = ({
               {loading ? 'Creating account...' : 'Sign Up'}
             </Button>
 
-            <Divider sx={{ my: 2 }}>OR</Divider>
+            {(onSocialAuth || socialProviders) && (
+              <>
+                <Divider sx={{ my: 2 }}>OR</Divider>
 
-            <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', mb: 2 }}>
-              <IconButton
-                onClick={() => onSocialAuth?.('google', 'signup')}
-                disabled={loading}
-                sx={{
-                  border: 1,
-                  borderColor: 'divider',
-                  '&:hover': { borderColor: 'primary.main', bgcolor: 'primary.main', color: 'white' },
-                }}
-              >
-                <GoogleIcon />
-              </IconButton>
-              <IconButton
-                onClick={() => onSocialAuth?.('github', 'signup')}
-                disabled={loading}
-                sx={{
-                  border: 1,
-                  borderColor: 'divider',
-                  '&:hover': { borderColor: 'primary.main', bgcolor: 'primary.main', color: 'white' },
-                }}
-              >
-                <GitHubIcon />
-              </IconButton>
-            </Box>
+                <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', mb: 2 }}>
+                  {socialProviders ? (
+                    socialProviders.map((provider) => (
+                      <IconButton
+                        key={provider.name}
+                        onClick={() => onSocialAuth?.(provider.name, 'signup')}
+                        disabled={loading}
+                        sx={{
+                          border: 1,
+                          borderColor: 'divider',
+                          '&:hover': { borderColor: 'primary.main', bgcolor: 'primary.main', color: 'white' },
+                        }}
+                      >
+                        {provider.icon}
+                      </IconButton>
+                    ))
+                  ) : (
+                    <>
+                      <IconButton
+                        onClick={() => onSocialAuth?.('google', 'signup')}
+                        disabled={loading}
+                        sx={{
+                          border: 1,
+                          borderColor: 'divider',
+                          '&:hover': { borderColor: 'primary.main', bgcolor: 'primary.main', color: 'white' },
+                        }}
+                      >
+                        <GoogleIcon />
+                      </IconButton>
+                      <IconButton
+                        onClick={() => onSocialAuth?.('github', 'signup')}
+                        disabled={loading}
+                        sx={{
+                          border: 1,
+                          borderColor: 'divider',
+                          '&:hover': { borderColor: 'primary.main', bgcolor: 'primary.main', color: 'white' },
+                        }}
+                      >
+                        <GitHubIcon />
+                      </IconButton>
+                    </>
+                  )}
+                </Box>
+              </>
+            )}
 
             <Box sx={{ textAlign: 'center' }}>
               <Typography variant="body2" color="text.secondary">
