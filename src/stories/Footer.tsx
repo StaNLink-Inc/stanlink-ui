@@ -18,12 +18,7 @@ export interface FooterSection {
 
 export interface FooterProps {
   sections?: FooterSection[];
-  socialLinks?: {
-    facebook?: string;
-    twitter?: string;
-    linkedin?: string;
-    github?: string;
-  };
+  socialProviders?: Array<{ name: string; icon: React.ReactNode; href: string }>;
   copyrightText?: string;
   showGraphic?: boolean;
   graphicPosition?: 'background' | 'middle';
@@ -31,7 +26,7 @@ export interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({
   sections = [],
-  socialLinks = {},
+  socialProviders = [],
   copyrightText = '© 2024 StaNLink. All rights reserved.',
   showGraphic = true,
   graphicPosition = 'background',
@@ -82,26 +77,11 @@ export const Footer: React.FC<FooterProps> = ({
           </Typography>
 
           <Box sx={{ display: 'flex', gap: 1 }}>
-            {socialLinks.facebook && (
-              <IconButton href={socialLinks.facebook} color="inherit" size="small">
-                <FacebookIcon />
+            {socialProviders.map((provider, index) => (
+              <IconButton key={index} href={provider.href} color="inherit" size="small">
+                {provider.icon}
               </IconButton>
-            )}
-            {socialLinks.twitter && (
-              <IconButton href={socialLinks.twitter} color="inherit" size="small">
-                <TwitterIcon />
-              </IconButton>
-            )}
-            {socialLinks.linkedin && (
-              <IconButton href={socialLinks.linkedin} color="inherit" size="small">
-                <LinkedInIcon />
-              </IconButton>
-            )}
-            {socialLinks.github && (
-              <IconButton href={socialLinks.github} color="inherit" size="small">
-                <GitHubIcon />
-              </IconButton>
-            )}
+            ))}
           </Box>
         </Box>
       </Container>
