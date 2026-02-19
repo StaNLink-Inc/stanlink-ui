@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, TextField, Button, Typography, Checkbox, FormControlLabel, Link, Backdrop, Alert, Divider, IconButton } from '@mui/material';
+import { Box, TextField, Button, Typography, Checkbox, FormControlLabel, Link, Backdrop, Snackbar, Alert, Divider, IconButton } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
@@ -12,6 +12,9 @@ export interface AuthPageProps {
   onViewChange?: (view: 'signin' | 'signup' | 'forgot' | 'reset') => void;
   loading?: boolean;
   error?: string;
+  success?: string;
+  info?: string;
+  warning?: string;
   view?: 'signin' | 'signup' | 'forgot' | 'reset';
   socialProviders?: Array<{ name: string; icon: React.ReactNode }>;
 }
@@ -25,6 +28,9 @@ export const AuthPage: React.FC<AuthPageProps> = ({
   onViewChange,
   loading = false,
   error,
+  success,
+  info,
+  warning,
   view = 'signin',
   socialProviders,
 }) => {
@@ -150,11 +156,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
           <Typography variant="h3" fontWeight="bold" gutterBottom>Sign In</Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>Welcome back! Please login to your account.</Typography>
 
-          {error && (
-            <Alert severity="error" sx={{ mb: 2 }}>
-              {error}
-            </Alert>
-          )}
+
 
           <Box component="form" onSubmit={handleLoginSubmit}>
             <TextField
@@ -504,6 +506,16 @@ export const AuthPage: React.FC<AuthPageProps> = ({
           </Box>
         </Box>
       </Box>
+      
+      <Snackbar
+        open={!!(error || success || info || warning)}
+        autoHideDuration={6000}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert severity={error ? 'error' : success ? 'success' : info ? 'info' : 'warning'}>
+          {error || success || info || warning}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
