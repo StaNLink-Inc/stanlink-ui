@@ -510,7 +510,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
       <Snackbar
         open={!!(error || success || info || warning)}
         autoHideDuration={6000}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       >
         <Alert severity={error ? 'error' : success ? 'success' : info ? 'info' : 'warning'}>
           {error || success || info || warning}
