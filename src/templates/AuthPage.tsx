@@ -5,7 +5,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 
 export interface AuthPageProps {
   onLogin?: (email: string, password: string, remember: boolean) => void;
-  onSignUp?: (name: string, email: string, password: string) => void;
+  onSignUp?: (email: string, password: string) => void;
   onForgotPassword?: (email: string) => void;
   onResetPassword?: (password: string, confirmPassword: string) => void;
   onSocialAuth?: (provider: string, mode: 'login' | 'signup') => void;
@@ -62,7 +62,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
 
   const handleSignUpSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSignUp?.(name, email, password);
+    onSignUp?.(email, password);
   };
 
   const handleForgotPasswordSubmit = (e: React.FormEvent) => {
@@ -284,14 +284,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
           <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>Create your account to get started.</Typography>
 
           <Box component="form" onSubmit={handleSignUpSubmit}>
-            <TextField
-              fullWidth
-              label="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              margin="normal"
-              required
-            />
+            
             <TextField
               fullWidth
               label="Email"
@@ -519,3 +512,4 @@ export const AuthPage: React.FC<AuthPageProps> = ({
     </Box>
   );
 };
+
