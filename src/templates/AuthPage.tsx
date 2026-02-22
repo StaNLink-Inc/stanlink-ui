@@ -2,13 +2,14 @@ import React from 'react';
 import { Box, TextField, Button, Typography, Checkbox, FormControlLabel, Link, Backdrop, Snackbar, Alert, Divider, IconButton } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import TelegramIcon from '@mui/icons-material/Telegram';
 
 export interface AuthPageProps {
   onLogin?: (email: string, password: string, remember: boolean) => void;
   onSignUp?: (email: string, password: string) => void;
   onForgotPassword?: (email: string) => void;
   onResetPassword?: (password: string, confirmPassword: string) => void;
-  onSocialAuth?: (provider: string, mode: 'login' | 'signup') => void;
+  onSocialAuth?: (provider: string, mode: 'login' | 'signup', data?: any) => void;
   onViewChange?: (view: 'signin' | 'signup' | 'forgot' | 'reset') => void;
   loading?: boolean;
   error?: string;
@@ -41,6 +42,17 @@ export const AuthPage: React.FC<AuthPageProps> = ({
   const [confirmPassword, setConfirmPassword] = React.useState('');
   const [name, setName] = React.useState('');
   const [remember, setRemember] = React.useState(false);
+
+  React.useEffect(() => {
+    // Only run on client
+    if (typeof window === 'undefined') return;
+
+    // Handle Telegram callback
+    (window as any).onTelegramAuth = (user: any) => {
+      onSocialAuth?.('telegram', isSignUp ? 'signup' : 'login', user);
+    };
+  }, [onSocialAuth, isSignUp]);
+
 
   const handleViewChange = (newView: 'signin' | 'signup' | 'forgot' | 'reset') => {
     setIsTransitioning(true);
@@ -240,6 +252,31 @@ export const AuthPage: React.FC<AuthPageProps> = ({
                       >
                         <GitHubIcon />
                       </IconButton>
+
+                      <IconButton
+                        onClick={() => {
+                          const botUsername = 'pypofficialbot';
+                          const script = document.createElement('script');
+                          script.src = 'https://telegram.org/js/telegram-widget.js?22';
+                          script.setAttribute('data-telegram-login', botUsername);
+                          script.setAttribute('data-size', 'large');
+                          script.setAttribute('data-onauth', 'onTelegramAuth(user)');
+                          script.setAttribute('data-request-access', 'write');
+                          
+                          // This is a hacky way to trigger it from an icon button click
+                          // Better: just use the IconButton to trigger our own redirect flow if possible
+                          onSocialAuth?.('telegram', isSignUp ? 'signup' : 'login');
+                        }}
+                        disabled={loading}
+                        sx={{
+                          border: 1,
+                          borderColor: 'divider',
+                          '&:hover': { borderColor: 'primary.main', bgcolor: 'primary.main', color: 'white' },
+                        }}
+                      >
+                        <TelegramIcon />
+                      </IconButton>
+
                     </>
                   )}
                 </Box>
@@ -358,6 +395,31 @@ export const AuthPage: React.FC<AuthPageProps> = ({
                       >
                         <GitHubIcon />
                       </IconButton>
+
+                      <IconButton
+                        onClick={() => {
+                          const botUsername = 'pypofficialbot';
+                          const script = document.createElement('script');
+                          script.src = 'https://telegram.org/js/telegram-widget.js?22';
+                          script.setAttribute('data-telegram-login', botUsername);
+                          script.setAttribute('data-size', 'large');
+                          script.setAttribute('data-onauth', 'onTelegramAuth(user)');
+                          script.setAttribute('data-request-access', 'write');
+                          
+                          // This is a hacky way to trigger it from an icon button click
+                          // Better: just use the IconButton to trigger our own redirect flow if possible
+                          onSocialAuth?.('telegram', isSignUp ? 'signup' : 'login');
+                        }}
+                        disabled={loading}
+                        sx={{
+                          border: 1,
+                          borderColor: 'divider',
+                          '&:hover': { borderColor: 'primary.main', bgcolor: 'primary.main', color: 'white' },
+                        }}
+                      >
+                        <TelegramIcon />
+                      </IconButton>
+
                     </>
                   )}
                 </Box>
@@ -512,4 +574,6 @@ export const AuthPage: React.FC<AuthPageProps> = ({
     </Box>
   );
 };
+
+
 
