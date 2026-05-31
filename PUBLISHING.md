@@ -1,31 +1,20 @@
 # Publishing Guide
 
-## Install from GitHub Packages
+## Install from NPM
 
-### Setup (One-time)
-
-1. **Create GitHub Personal Access Token**
-   - Go to: https://github.com/settings/tokens
-   - Generate new token (classic)
-   - Select scope: `read:packages`
-   - Copy the token
-
-2. **Create `.npmrc` in your project:**
-   ```
-   @stanlink-inc:registry=https://npm.pkg.github.com
-   //npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
-   ```
+> [!WARNING]
+> **DEPRECATION NOTICE**: The GitHub Packages registry (`@stanlink-inc/ui`) is deprecated. Please install from the official NPM registry using `@stanlink/ui`.
 
 ### Install
 
 ```bash
-npm install @stanlink-inc/ui
+npm install @stanlink/ui
 ```
 
 ### Usage
 
 ```tsx
-import { Button, theme } from '@stanlink-inc/ui';
+import { Button, theme } from '@stanlink/ui';
 import { ThemeProvider } from '@mui/material/styles';
 
 function App() {
@@ -40,11 +29,11 @@ function App() {
 ## Update to Latest
 
 ```bash
-npm update @stanlink-inc/ui
+npm update @stanlink/ui
 ```
 
 ## Install Specific Version
 
 ```bash
-npm install @stanlink-inc/ui@0.1.2
+npm install @stanlink/ui@0.1.2
 ```

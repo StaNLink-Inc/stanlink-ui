@@ -1,29 +1,12 @@
 # Installation Guide
 
-## Setup GitHub Packages (One-time)
-
-### 1. Create GitHub Personal Access Token
-
-1. Go to: https://github.com/settings/tokens
-2. Click "Generate new token (classic)"
-3. Select scope: `read:packages`
-4. Copy the token
-
-### 2. Configure npm in Your Project
-
-Create `.npmrc` file in your project root:
-
-```
-@stanlink-inc:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
-```
-
-Replace `YOUR_GITHUB_TOKEN` with your actual token.
+> [!WARNING]
+> **DEPRECATION NOTICE**: The GitHub Packages registry (`@stanlink-inc/ui`) is deprecated. Please install from the official NPM registry using `@stanlink/ui`.
 
 ## Install Package
 
 ```bash
-npm install @stanlink-inc/ui
+npm install @stanlink/ui
 ```
 
 ## Install Peer Dependencies
@@ -35,7 +18,7 @@ npm install react react-dom @mui/material @emotion/react @emotion/styled @mui/ic
 ## Usage
 
 ```tsx
-import { Button, AuthPage, Logo, theme } from '@stanlink-inc/ui';
+import { Button, AuthPage, Logo, theme } from '@stanlink/ui';
 import { ThemeProvider } from '@mui/material/styles';
 
 function App() {

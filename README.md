@@ -1,31 +1,19 @@
-# @stanlink-inc/ui
+# @stanlink/ui
 
 StaNLink Design System - Professional UI components built with Material-UI and React.
 
 ## Installation
 
-### 1. Setup GitHub Packages Authentication
+> [!WARNING]
+> **DEPRECATION NOTICE**: The GitHub Packages registry (`@stanlink-inc/ui`) is deprecated. Please install from the official NPM registry using `@stanlink/ui`.
 
-Create `.npmrc` in your project root:
-
-```
-@stanlink-inc:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
-```
-
-**Get your GitHub token:**
-1. Go to https://github.com/settings/tokens
-2. Generate new token (classic)
-3. Select `read:packages` scope
-4. Copy the token
-
-### 2. Install Package
+### Install Package
 
 ```bash
-npm install @stanlink-inc/ui
+npm install @stanlink/ui
 ```
 
-### 3. Install Peer Dependencies
+### Install Peer Dependencies
 
 ```bash
 npm install react react-dom @mui/material @emotion/react @emotion/styled @mui/icons-material
@@ -34,7 +22,7 @@ npm install react react-dom @mui/material @emotion/react @emotion/styled @mui/ic
 ## Usage
 
 ```tsx
-import { Button, Card, AppBar, Footer, Logo, theme } from '@stanlink-inc/ui';
+import { Button, Card, AppBar, Footer, Logo, theme } from '@stanlink/ui';
 import { ThemeProvider } from '@mui/material/styles';
 
 function App() {
