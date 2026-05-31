@@ -3,6 +3,7 @@
   "private": false,
   "version": "0.1.10",
   "description": "StaNLink Design System - Professional UI components for consistent branding",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
