@@ -1,5 +1,11 @@
 # @stanlink/ui
 
+## 0.3.0
+
+### Minor Changes
+
+- 5110750: feat(ui): add stickyStepper prop to OnboardingPage to optionally align Stepper to the top in vertical layouts
+
 ## 0.2.1
 
 ### Patch Changes
