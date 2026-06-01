@@ -1,7 +1,7 @@
 {
   "name": "@stanlink/ui",
   "private": false,
-  "version": "0.1.11",
+  "version": "0.2.0",
   "description": "StaNLink Design System - Professional UI components for consistent branding",
   "license": "MIT",
   "type": "module",
