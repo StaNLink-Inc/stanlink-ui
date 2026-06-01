@@ -267,6 +267,58 @@ const stanlinkTheme = createTheme({
         },
       },
     },
+    MuiBottomNavigation: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          backdropFilter: 'blur(20px)',
+          borderRadius: 24,
+          padding: '8px 16px',
+          boxShadow: '0px 8px 32px rgba(60, 64, 67, 0.15)',
+          height: 'auto',
+          minHeight: 72,
+          margin: '16px auto',
+          width: 'calc(100% - 32px)',
+          maxWidth: 400,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        },
+      },
+    },
+    MuiBottomNavigationAction: {
+      styleOverrides: {
+        root: {
+          minWidth: 'auto',
+          padding: '8px 16px',
+          borderRadius: 16,
+          transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+          color: '#5F6368',
+          '& .MuiSvgIcon-root': {
+            transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+          },
+          '&.Mui-selected': {
+            color: '#D97757',
+            backgroundColor: 'rgba(217, 119, 87, 0.12)',
+            transform: 'scale(1.05)',
+            '& .MuiSvgIcon-root': {
+              transform: 'scale(1.1)',
+            },
+          },
+          '&:hover': {
+            backgroundColor: 'rgba(217, 119, 87, 0.05)',
+          },
+        },
+        label: {
+          fontWeight: 600,
+          marginTop: 4,
+          '&.Mui-selected': {
+            fontSize: '0.75rem',
+            fontWeight: 700,
+          },
+        },
+      },
+    },
     MuiMenuItem: {
       styleOverrides: {
         root: {
