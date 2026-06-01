@@ -42,7 +42,7 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
       <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'grey.100', p: 2 }}>
         <Box sx={{ width: '100%', maxWidth: 1000, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 3 }}>
           {!isMobile && (
-            <Stepper activeStep={activeStep} orientation="vertical" sx={{ alignSelf: 'flex-start', minWidth: { xs: 'auto', md: 250 }, bgcolor: 'transparent' }}>
+            <Stepper activeStep={activeStep} orientation="vertical" sx={{ minWidth: { xs: 'auto', md: 250 }, bgcolor: 'transparent' }}>
               {steps.map((step) => (
                 <Step key={step.label}>
                   <StepLabel>{step.label}</StepLabel>
