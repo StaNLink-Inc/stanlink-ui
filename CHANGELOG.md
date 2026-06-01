@@ -1,5 +1,11 @@
 # @stanlink/ui
 
+## 0.2.1
+
+### Patch Changes
+
+- c87912e: revert(ui): remove alignSelf from Stepper vertical layout
+
 ## 0.2.0
 
 ### Minor Changes
