@@ -20,6 +20,7 @@ export interface OnboardingPageProps {
   loading?: boolean;
   allowSkip?: boolean;
   orientation?: 'horizontal' | 'vertical';
+  stickyStepper?: boolean;
 }
 
 export const OnboardingPage: React.FC<OnboardingPageProps> = ({
@@ -32,6 +33,7 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
   loading = false,
   allowSkip = false,
   orientation = 'horizontal',
+  stickyStepper = false,
 }) => {
   const isLastStep = activeStep === steps.length - 1;
   const theme = useTheme();
@@ -42,7 +44,7 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
       <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'grey.100', p: 2 }}>
         <Box sx={{ width: '100%', maxWidth: 1000, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 3 }}>
           {!isMobile && (
-            <Stepper activeStep={activeStep} orientation="vertical" sx={{ minWidth: { xs: 'auto', md: 250 }, bgcolor: 'transparent' }}>
+            <Stepper activeStep={activeStep} orientation="vertical" sx={{ alignSelf: stickyStepper ? 'flex-start' : undefined, minWidth: { xs: 'auto', md: 250 }, bgcolor: 'transparent' }}>
               {steps.map((step) => (
                 <Step key={step.label}>
                   <StepLabel>{step.label}</StepLabel>
